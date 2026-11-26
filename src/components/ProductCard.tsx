@@ -20,6 +20,7 @@ export function ProductCard({ product }: { product: Product }) {
           <span className="product-price">{formatKsh(product.priceKsh)}</span>
         </div>
         <p className="product-card-material">{product.material}</p>
+        {product.colors.length > 1 && <div className="product-card-color-preview" aria-label={`${product.colors.length} colour options`}><span className="product-card-swatches" aria-hidden="true">{product.colors.slice(0, 5).map((color) => <i key={color.name} style={{ backgroundColor: color.hex }} />)}</span><span>{product.colors.length} colours</span></div>}
       </div>
     </article>
   );

@@ -8,7 +8,7 @@ A responsive luxury-fashion storefront built around the supplied ÉLVARÉ emblem
 
 - Editorial home page with campaign hero, collection stories, best sellers, new arrivals, brand philosophy and newsletter form.
 - Shop, collection, search, department/category filtering and price/popularity sorting.
-- Individual product pages with colour/size selection, composition, fit and delivery notes.
+- Individual product pages with colour/size selection, composition, fit and delivery notes. The Linen Shirt demo has five colourways; its selected swatch updates the garment photo and carries that variant image into the bag and checkout. Database colour options can include an optional `image` path for the same behaviour on live products.
 - Responsive mobile navigation and accessible focus states.
 - Persistent browser-local cart with add/remove, quantity controls, subtotal and checkout summary.
 - Kenyan checkout fields (47 counties), sample KSh 350 delivery estimate, and a deliberately non-paying “Place demo order” action.
@@ -72,7 +72,7 @@ If Supabase is not configured, the storefront stays in demo mode. If the URL/key
    ```
 
    The browser has no sign-up flow or hard-coded admin credentials. The route checks the authenticated user with the `is_admin()` Postgres function; every privileged table/storage operation is independently restricted by RLS.
-4. Add real inventory in the admin console (or insert it through a trusted process). Product images can be uploaded to the `product-images` bucket by verified administrators.
+4. Add real inventory in the admin console (or insert it through a trusted process). Product images can be uploaded to the `product-images` bucket by verified administrators. To preview distinct colourways, include an `image` property alongside each colour’s `name` and `hex` in the product `colors` JSON array.
 5. Verify anonymous access sees only active products and cannot query orders, profiles, messages or subscribers. Test with a non-admin authenticated account; it should be denied store-management access.
 6. Review the SQL policies, privacy/retention obligations and the illustrative KSh 350 fee. Replace the demo content and obtain the brand’s approved copy, pricing, stock, delivery and returns policies before launch.
 

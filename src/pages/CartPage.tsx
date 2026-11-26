@@ -29,7 +29,7 @@ export function CartPage() {
             <div className="cart-items" aria-label="Items in your shopping bag">
               {items.map((item) => (
                 <article className="cart-item" key={item.key}>
-                  <Link to={`/product/${item.product.slug}`} className="cart-item-image"><img src={item.product.image} alt={item.product.name} /></Link>
+                  <Link to={`/product/${item.product.slug}`} className="cart-item-image"><img src={item.color.image ?? item.product.image} alt={`${item.product.name} in ${item.color.name}`} /></Link>
                   <div className="cart-item-main">
                     <div className="cart-item-heading"><div><p className="product-card-category">{item.product.department} · {item.product.category}</p><Link className="product-card-name" to={`/product/${item.product.slug}`}>{item.product.name}</Link></div><strong>{formatKsh(item.product.priceKsh * item.quantity)}</strong></div>
                     <p className="cart-variant">Colour: {item.color.name}<span>·</span>Size: {item.size}</p>

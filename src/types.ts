@@ -3,6 +3,8 @@ export type Department = 'Men' | 'Women' | 'Unisex';
 export type ColorOption = {
   name: string;
   hex: string;
+  /** Optional color-specific product image used for an instant product preview. */
+  image?: string;
 };
 
 export type Product = {

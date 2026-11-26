@@ -48,7 +48,7 @@ export function ProductPage() {
         <Breadcrumbs items={[{ label: 'Shop', to: '/shop' }, { label: product.name }]} />
         <div className="product-detail-layout">
           <div className="product-detail-image-wrap">
-            <img className="product-detail-image" src={product.image} alt={`${product.name}, ${product.material}`} fetchPriority="high" />
+            <img className="product-detail-image" src={color.image ?? product.image} alt={`${product.name} in ${color.name}, ${product.material}`} fetchPriority="high" />
             {product.isNew && <span className="product-badge product-detail-badge">New arrival</span>}
             <span className="product-image-caption">ÉLVARÉ · {product.collection.toUpperCase()}</span>
           </div>

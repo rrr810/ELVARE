@@ -17,7 +17,13 @@ export const supabase = isSupabaseConfigured
 
 export function mapDatabaseProduct(row: Record<string, unknown>): Product {
   const colors = Array.isArray(row.colors)
-    ? (row.colors as ColorOption[]).filter((color) => typeof color?.name === 'string' && typeof color?.hex === 'string')
+    ? (row.colors as ColorOption[])
+      .filter((color) => typeof color?.name === 'string' && typeof color?.hex === 'string')
+      .map((color) => ({
+        name: color.name,
+        hex: color.hex,
+        ...(typeof color.image === 'string' ? { image: color.image } : {}),
+      }))
     : [];
   const department = row.department === 'Men' || row.department === 'Women' ? row.department : 'Unisex';
   const sizes = Array.isArray(row.sizes) && row.sizes.length ? row.sizes.map(String) : ['One size'];
