@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex" />
+    <title>Returning to ÉLVARÉ…</title>
+  </head>
+  <body>
+    <script>
+      // GitHub Pages serves this file for React Router deep links.
+      const path = window.location.pathname;
+      const base = '/ELVARE/';
+      const route = path === '/ELVARE' ? '/' : path.startsWith(base) ? `/${path.slice(base.length)}` : '/';
+      const destination = `${base}?p=${encodeURIComponent(`${route}${window.location.search}${window.location.hash}`)}`;
+      window.location.replace(destination);
+    </script>
+  </body>
+</html>

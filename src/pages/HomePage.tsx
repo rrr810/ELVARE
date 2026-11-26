@@ -5,6 +5,7 @@ import { ProductGrid } from '../components/ProductCard';
 import { NewsletterForm } from '../components/NewsletterForm';
 import { COLLECTIONS, DEMO_PRODUCTS } from '../data/products';
 import { useCatalog } from '../context/CatalogContext';
+import { assetPath } from '../lib/assets';
 
 export function HomePage() {
   const { products, dataMode, catalogMessage } = useCatalog();
@@ -51,7 +52,7 @@ export function HomePage() {
         <div className="collection-grid">
           {[signature, classic, weekend].map((collection, index) => (
             <Link to={`/collections/${collection.slug}`} className={`collection-card collection-card-${index + 1}`} key={collection.slug}>
-              <img src={collection.image} alt={collection.imageAlt} loading="lazy" />
+              <img src={assetPath(collection.image)} alt={collection.imageAlt} loading="lazy" />
               <span className="collection-card-overlay" />
               <div className="collection-card-copy">
                 <span className="eyebrow eyebrow-gold">{collection.eyebrow}</span>
@@ -80,7 +81,7 @@ export function HomePage() {
 
       <section className="editorial-feature">
         <div className="editorial-feature-photo">
-          <img src="/images/editorial-women.webp" alt="A quiet ivory silhouette in the afternoon light" loading="lazy" />
+          <img src={assetPath('/images/editorial-women.webp')} alt="A quiet ivory silhouette in the afternoon light" loading="lazy" />
           <span className="photo-caption">A STUDY IN SOFT STRUCTURE · THE SIGNATURE COLLECTION</span>
         </div>
         <div className="editorial-feature-copy">
@@ -104,7 +105,7 @@ export function HomePage() {
       </section>
 
       <section className="philosophy-band">
-        <div className="philosophy-mark"><img src="/images/elvare-logo-lockup.webp" alt="ÉLVARÉ — The art of elegance" loading="lazy" /></div>
+        <div className="philosophy-mark"><img src={assetPath('/images/elvare-logo-lockup.webp')} alt="ÉLVARÉ — The art of elegance" loading="lazy" /></div>
         <div className="philosophy-copy">
           <p className="eyebrow eyebrow-gold">OUR HOUSE PRINCIPLE</p>
           <h2>Buy less.<br /><em>Choose well.</em><br />Wear often.</h2>

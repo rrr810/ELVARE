@@ -2,13 +2,14 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { PageMeta } from '../components/PageMeta';
+import { assetPath } from '../lib/assets';
 
 export function AboutPage() {
   return (
     <>
       <PageMeta title="Our story" description="Discover the ÉLVARÉ point of view: confidence, character and timeless elegance through thoughtfully selected pieces." />
       <section className="about-hero">
-        <img src="/images/editorial-hero.webp" alt="Two ÉLVARÉ models beneath a monumental limestone colonnade" fetchPriority="high" />
+        <img src={assetPath('/images/editorial-hero.webp')} alt="Two ÉLVARÉ models beneath a monumental limestone colonnade" fetchPriority="high" />
         <div className="about-hero-shade" />
         <div className="about-hero-copy container-wide">
           <Breadcrumbs items={[{ label: 'Our story' }]} />
@@ -20,7 +21,7 @@ export function AboutPage() {
       </section>
 
       <section className="about-intro container-wide">
-        <div className="about-intro-mark"><img src="/images/elvare-logo-lockup.webp" alt="ÉLVARÉ — The art of elegance" loading="lazy" /></div>
+        <div className="about-intro-mark"><img src={assetPath('/images/elvare-logo-lockup.webp')} alt="ÉLVARÉ — The art of elegance" loading="lazy" /></div>
         <div className="about-intro-copy">
           <p className="eyebrow">A NOTE ON GETTING DRESSED</p>
           <h2>Clothing is the beginning.<br /><em>Confidence is the feeling.</em></h2>
@@ -30,7 +31,7 @@ export function AboutPage() {
       </section>
 
       <section className="about-editorial">
-        <div className="about-editorial-image"><img src="/images/editorial-men.webp" alt="Quietly confident tailoring in a sun-warmed stone arch" loading="lazy" /></div>
+        <div className="about-editorial-image"><img src={assetPath('/images/editorial-men.webp')} alt="Quietly confident tailoring in a sun-warmed stone arch" loading="lazy" /></div>
         <div className="about-editorial-copy">
           <span className="eyebrow eyebrow-gold">THE THOUGHT BEHIND THE PIECE</span>
           <h2>Made for the<br /><em>long view.</em></h2>

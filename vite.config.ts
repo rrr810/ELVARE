@@ -1,7 +1,9 @@
+import { env } from 'node:process';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  base: env.VITE_BASE_PATH?.trim() ? (env.VITE_BASE_PATH.trim().endsWith('/') ? env.VITE_BASE_PATH.trim() : `${env.VITE_BASE_PATH.trim()}/`) : '/',
   plugins: [react()],
   server: {
     host: '0.0.0.0',

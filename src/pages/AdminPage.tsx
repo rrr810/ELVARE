@@ -6,6 +6,7 @@ import { PageMeta, formatKsh } from '../components/PageMeta';
 import { useCatalog } from '../context/CatalogContext';
 import { PRODUCT_CATEGORIES } from '../data/products';
 import { isSupabaseConfigured, mapDatabaseProduct, supabase } from '../lib/supabase';
+import { assetPath } from '../lib/assets';
 import type { Department, Product, StoreOrder } from '../types';
 
 type ProductForm = {
@@ -299,7 +300,7 @@ export function AdminPage() {
       <PageMeta title="Store administration" description="Secure ÉLVARÉ store administration. Requires a configured Supabase project and an administrator account." />
       {isCheckingSession ? <section className="admin-loading"><LoaderCircle className="spin" size={20} /><span>Checking secure session…</span></section> : !session ? (
         <section className="admin-login-page container-wide">
-          <div className="admin-login-aside"><img src="/images/elvare-logo-lockup.webp" alt="ÉLVARÉ — The art of elegance" /><p>THE HOUSE, IN GOOD HANDS</p></div>
+          <div className="admin-login-aside"><img src={assetPath('/images/elvare-logo-lockup.webp')} alt="ÉLVARÉ — The art of elegance" /><p>THE HOUSE, IN GOOD HANDS</p></div>
           <div className="admin-login-card">
             <Link to="/" className="admin-back-link"><ArrowLeft size={13} /> RETURN TO THE STOREFRONT</Link>
             <p className="eyebrow eyebrow-gold">ÉLVARÉ · PRIVATE ACCESS</p>
@@ -321,7 +322,7 @@ export function AdminPage() {
       ) : (
         <section className="admin-shell">
           <aside className="admin-sidebar">
-            <Link className="admin-sidebar-brand" to="/"><img src="/images/elvare-logo-wordmark.webp" alt="ÉLVARÉ" /><span>HOUSE CONSOLE</span></Link>
+            <Link className="admin-sidebar-brand" to="/"><img src={assetPath('/images/elvare-logo-wordmark.webp')} alt="ÉLVARÉ" /><span>HOUSE CONSOLE</span></Link>
             <p className="admin-sidebar-label">STORE MANAGEMENT</p>
             <nav aria-label="Administration">
               {ADMIN_TABS.map(({ key, label, icon: Icon }) => <button type="button" key={key} className={`admin-sidebar-link${tab === key ? ' is-active' : ''}`} onClick={() => setTab(key)}><Icon size={17} strokeWidth={1.45} />{label}</button>)}
@@ -358,7 +359,7 @@ export function AdminPage() {
                     <label className="form-field"><span>SIZES · COMMA SEPARATED</span><input name="sizes" value={productForm.sizes} onChange={handleProductChange} placeholder="XS, S, M, L" /></label>
                     <label className="form-field admin-field-wide"><span>COLOURS · JSON</span><textarea name="colors_json" value={productForm.colors_json} onChange={handleProductChange} rows={3} /><small>Each colour may include an <code>image</code> path so selecting its swatch previews that variant.</small></label>
                     <div className="form-field admin-field-wide"><span>PRODUCT PHOTOGRAPH</span><div className="admin-image-row"><input name="image_url" value={productForm.image_url} onChange={handleProductChange} placeholder="Paste an image URL or upload below" /><label className="admin-upload-button"><ImagePlus size={16} />{isUploading ? 'UPLOADING…' : 'UPLOAD'}<input type="file" accept="image/jpeg,image/png,image/webp" onChange={uploadImage} disabled={isUploading} /></label></div></div>
-                    {productForm.image_url && <div className="admin-image-preview"><img src={productForm.image_url} alt="Product image preview" /><span>Preview</span></div>}
+                    {productForm.image_url && <div className="admin-image-preview"><img src={assetPath(productForm.image_url)} alt="Product image preview" /><span>Preview</span></div>}
                     <div className="admin-checkboxes admin-field-wide"><label><input type="checkbox" name="is_new" checked={productForm.is_new} onChange={handleProductChange} /> New arrival</label><label><input type="checkbox" name="is_featured" checked={productForm.is_featured} onChange={handleProductChange} /> Featured</label><label><input type="checkbox" name="is_best_seller" checked={productForm.is_best_seller} onChange={handleProductChange} /> Best seller</label><label><input type="checkbox" name="is_active" checked={productForm.is_active} onChange={handleProductChange} /> Visible in store</label></div>
                     <div className="admin-editor-actions admin-field-wide"><button type="button" className="button button-outline-dark" onClick={() => setShowProductForm(false)}>CANCEL</button><button type="submit" className="button button-dark" disabled={isSaving || isUploading}>{isSaving ? 'SAVING…' : productForm.id ? 'SAVE CHANGES' : 'ADD PIECE'} <PackagePlus size={15} /></button></div>
                   </form>
@@ -373,7 +374,7 @@ export function AdminPage() {
 }
 
 function AdminSetup() {
-  return <section className="admin-setup container-wide"><PageMeta title="Store administration" description="Supabase setup is required to access the private ÉLVARÉ administration console." /><div className="admin-setup-card"><div className="admin-setup-mark"><img src="/images/elvare-logo-emblem.webp" alt="ÉLVARÉ emblem" /></div><p className="eyebrow">ÉLVARÉ · PRIVATE ACCESS</p><h1>The house is <em>being prepared.</em></h1><p>Store administration is locked until Supabase URL and public anon key are configured. This page never accepts a hard-coded admin password and never exposes a service-role key.</p><div className="admin-setup-steps"><span><Check size={14} /> Add the two public Vite environment variables</span><span><Check size={14} /> Apply the Supabase schema and row-level security policies</span><span><Check size={14} /> Create an administrator account in Supabase Auth</span></div><Link to="/" className="button button-dark">RETURN TO ÉLVARÉ <ArrowUpRight size={14} /></Link></div></section>;
+  return <section className="admin-setup container-wide"><PageMeta title="Store administration" description="Supabase setup is required to access the private ÉLVARÉ administration console." /><div className="admin-setup-card"><div className="admin-setup-mark"><img src={assetPath('/images/elvare-logo-emblem.webp')} alt="ÉLVARÉ emblem" /></div><p className="eyebrow">ÉLVARÉ · PRIVATE ACCESS</p><h1>The house is <em>being prepared.</em></h1><p>Store administration is locked until Supabase URL and public anon key are configured. This page never accepts a hard-coded admin password and never exposes a service-role key.</p><div className="admin-setup-steps"><span><Check size={14} /> Add the two public Vite environment variables</span><span><Check size={14} /> Apply the Supabase schema and row-level security policies</span><span><Check size={14} /> Create an administrator account in Supabase Auth</span></div><Link to="/" className="button button-dark">RETURN TO ÉLVARÉ <ArrowUpRight size={14} /></Link></div></section>;
 }
 
 function AdminOverview({ products, orders, profileCount, setTab }: { products: Product[]; orders: StoreOrder[]; profileCount: number; setTab: (tab: AdminTab) => void }) {
@@ -389,7 +390,7 @@ function AdminOverview({ products, orders, profileCount, setTab }: { products: P
 }
 
 function AdminProducts({ products, onEdit, onDelete, onNew }: { products: Product[]; onEdit: (product: Product) => void; onDelete: (product: Product) => void; onNew: () => void }) {
-  return <section className="admin-panel admin-table-panel"><div className="admin-panel-heading"><div><p className="eyebrow">THE CATALOGUE</p><h2>Product inventory</h2></div><button className="button button-dark admin-add-button" onClick={onNew}><PackagePlus size={15} /> ADD A PIECE</button></div>{products.length ? <div className="admin-table-wrap"><table className="admin-table"><thead><tr><th>PIECE</th><th>COLLECTION</th><th>PRICE</th><th>STOCK</th><th>STATUS</th><th>ACTIONS</th></tr></thead><tbody>{products.map((product) => <tr key={product.id}><td><div className="admin-product-cell"><img src={product.image} alt="" /><span><strong>{product.name}</strong><small>{product.department} · {product.category}</small></span></div></td><td>{product.collection}</td><td>{formatKsh(product.priceKsh)}</td><td><span className={product.stock < 5 ? 'stock-low' : ''}>{product.stock}</span></td><td><span className={`status-pill${product.isActive === false ? ' status-pill-muted' : ''}`}>{product.isActive === false ? 'HIDDEN' : product.stock < 1 ? 'OUT OF STOCK' : 'ACTIVE'}</span></td><td><div className="admin-row-actions"><button type="button" aria-label={`Edit ${product.name}`} onClick={() => onEdit(product)}><Pencil size={14} /></button><button type="button" aria-label={`Delete ${product.name}`} onClick={() => onDelete(product)}><Trash2 size={14} /></button></div></td></tr>)}</tbody></table></div> : <p className="admin-empty-state">No products yet. Add the first live piece to your catalog.</p>}</section>;
+  return <section className="admin-panel admin-table-panel"><div className="admin-panel-heading"><div><p className="eyebrow">THE CATALOGUE</p><h2>Product inventory</h2></div><button className="button button-dark admin-add-button" onClick={onNew}><PackagePlus size={15} /> ADD A PIECE</button></div>{products.length ? <div className="admin-table-wrap"><table className="admin-table"><thead><tr><th>PIECE</th><th>COLLECTION</th><th>PRICE</th><th>STOCK</th><th>STATUS</th><th>ACTIONS</th></tr></thead><tbody>{products.map((product) => <tr key={product.id}><td><div className="admin-product-cell"><img src={assetPath(product.image)} alt="" /><span><strong>{product.name}</strong><small>{product.department} · {product.category}</small></span></div></td><td>{product.collection}</td><td>{formatKsh(product.priceKsh)}</td><td><span className={product.stock < 5 ? 'stock-low' : ''}>{product.stock}</span></td><td><span className={`status-pill${product.isActive === false ? ' status-pill-muted' : ''}`}>{product.isActive === false ? 'HIDDEN' : product.stock < 1 ? 'OUT OF STOCK' : 'ACTIVE'}</span></td><td><div className="admin-row-actions"><button type="button" aria-label={`Edit ${product.name}`} onClick={() => onEdit(product)}><Pencil size={14} /></button><button type="button" aria-label={`Delete ${product.name}`} onClick={() => onDelete(product)}><Trash2 size={14} /></button></div></td></tr>)}</tbody></table></div> : <p className="admin-empty-state">No products yet. Add the first live piece to your catalog.</p>}</section>;
 }
 
 function AdminOrders({ orders, orderItems, onStatusChange }: { orders: StoreOrder[]; orderItems: OrderItemRecord[]; onStatusChange: (id: string, status: string) => void }) {

@@ -2,12 +2,13 @@ import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { Product } from '../types';
 import { formatKsh } from './PageMeta';
+import { assetPath } from '../lib/assets';
 
 export function ProductCard({ product }: { product: Product }) {
   return (
     <article className="product-card">
       <Link className="product-card-image" to={`/product/${product.slug}`} aria-label={`View ${product.name}`}>
-        <img src={product.image} alt={`${product.name} — ${product.department.toLowerCase()} ${product.category.toLowerCase()}`} loading="lazy" />
+        <img src={assetPath(product.image)} alt={`${product.name} — ${product.department.toLowerCase()} ${product.category.toLowerCase()}`} loading="lazy" />
         {product.isNew && <span className="product-badge">New arrival</span>}
         <span className="product-view" aria-hidden="true"><ArrowUpRight size={16} strokeWidth={1.35} /></span>
       </Link>

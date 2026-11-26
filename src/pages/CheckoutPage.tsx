@@ -6,6 +6,7 @@ import { PageMeta, formatKsh } from '../components/PageMeta';
 import { useCart } from '../context/CartContext';
 import { useCatalog } from '../context/CatalogContext';
 import { isSupabaseConfigured, submitDemoOrder } from '../lib/supabase';
+import { assetPath } from '../lib/assets';
 
 type CheckoutFields = {
   name: string;
@@ -143,7 +144,7 @@ export function CheckoutPage() {
 
           <aside className="checkout-summary">
             <p className="eyebrow">A CONSIDERED SELECTION</p><h2>Order summary</h2>
-            <div className="checkout-summary-items">{items.map((item) => <div className="checkout-summary-item" key={item.key}><img src={item.color.image ?? item.product.image} alt="" /><div><strong>{item.product.name}</strong><span>{item.size} · {item.color.name} · Qty {item.quantity}</span></div><b>{formatKsh(item.product.priceKsh * item.quantity)}</b></div>)}</div>
+            <div className="checkout-summary-items">{items.map((item) => <div className="checkout-summary-item" key={item.key}><img src={assetPath(item.color.image ?? item.product.image)} alt="" /><div><strong>{item.product.name}</strong><span>{item.size} · {item.color.name} · Qty {item.quantity}</span></div><b>{formatKsh(item.product.priceKsh * item.quantity)}</b></div>)}</div>
             <div className="summary-line"><span>Subtotal</span><span>{formatKsh(subtotal)}</span></div>
             <div className="summary-line"><span>Delivery estimate</span><span>{formatKsh(DELIVERY_FEE_KSH)}</span></div>
             <p className="delivery-estimate-note">Illustrative flat estimate only. Set your actual delivery policy before launch.</p>

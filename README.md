@@ -91,6 +91,12 @@ If Supabase is not configured, the storefront stays in demo mode. If the URL/key
 - Email: connect a verified transactional/newsletter provider; demo newsletter/message forms are not sent unless the matching Supabase schema is configured, and Supabase table inserts alone do not send email.
 - Production hardening: add CAPTCHA/rate limiting and abuse monitoring to public forms/order RPC, privacy retention/consent rules, backups, monitoring, and end-to-end payment/order tests.
 
+## Deploy to GitHub Pages
+
+A GitHub Actions workflow is included at `.github/workflows/deploy-pages.yml`. It builds with the project-site base path (`/ELVARE/`) and deploys the Vite output, including a React Router deep-link fallback. In **Repository Settings → Pages**, set the build/deploy source to **GitHub Actions**. The workflow runs for pushes to `main` and `arena/9ad4bf90-elvare`. For a live catalog, add optional `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` repository variables under **Settings → Secrets and variables → Actions → Variables**. The project URL is `https://rrr810.github.io/ELVARE/`.
+
+For Vercel, the default base remains `/`.
+
 ## Deploy to Vercel
 
 1. Import the repository into Vercel and use the **Vite** preset (build command `npm run build`, output directory `dist`).

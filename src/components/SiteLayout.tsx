@@ -2,6 +2,7 @@ import { Suspense, useEffect, useState, type FormEvent } from 'react';
 import { ArrowUpRight, Menu, Search, ShoppingBag, X } from 'lucide-react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { assetPath } from '../lib/assets';
 
 const desktopLinks = [
   { label: 'New arrivals', to: '/collections/new-arrivals' },
@@ -44,7 +45,7 @@ export function SiteLayout() {
             {menuOpen ? <X size={21} strokeWidth={1.5} /> : <Menu size={21} strokeWidth={1.5} />}
           </button>
           <Link className="header-wordmark" to="/" aria-label="ÉLVARÉ home">
-            <img src="/images/elvare-logo-wordmark.webp" alt="ÉLVARÉ" width="172" height="32" />
+            <img src={assetPath('/images/elvare-logo-wordmark.webp')} alt="ÉLVARÉ" width="172" height="32" />
           </Link>
           <div className="header-utilities">
             <button className="icon-button search-toggle" aria-label={searchOpen ? 'Close search' : 'Search'} aria-expanded={searchOpen} onClick={() => setSearchOpen((open) => !open)}>
@@ -92,10 +93,10 @@ function SiteFooter() {
       <div className="footer-top container-wide">
         <div className="footer-brand-column">
           <Link to="/" className="footer-logo" aria-label="ÉLVARÉ home">
-            <img src="/images/elvare-logo-wordmark.webp" alt="ÉLVARÉ" width="185" height="34" loading="lazy" />
+            <img src={assetPath('/images/elvare-logo-wordmark.webp')} alt="ÉLVARÉ" width="185" height="34" loading="lazy" />
           </Link>
           <p>Timeless pieces. Thoughtfully chosen.<br />The art of elegance, every day.</p>
-          <span className="footer-mark"><img src="/images/elvare-logo-emblem.webp" alt="" width="46" height="50" loading="lazy" /></span>
+          <span className="footer-mark"><img src={assetPath('/images/elvare-logo-emblem.webp')} alt="" width="46" height="50" loading="lazy" /></span>
         </div>
         <div className="footer-link-group">
           <h2>Explore</h2>
